@@ -1,0 +1,66 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>ثبت کافه</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'site/bootstrap/css/bootstrap.rtl.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'site/css/signin.css' %}" rel="stylesheet">
+
+    <style media="screen">
+    .form-add-cafe {
+      width: 100%;
+      max-width: 550px;
+      padding: 15px;
+      margin: auto;
+    }
+    </style>
+  </head>
+  <body class="text-center">
+
+<main class="form-add-cafe">
+  <form method="POST" enctype="multipart/form-data">
+
+    <h1 class="h3 mb-3 fw-normal">کافه خود را ثبت کنید</h1>
+    {% csrf_token %}
+    <div class="form-floating">
+      <input name="title" class="form-control" id="floatingInput" placeholder="">
+      <label for="floatingInput">نام کافی شاپ</label>
+    </div>
+    <div class="form-floating">
+      <input name="description" class="form-control" id="floatDescription" placeholder="">
+      <label for="floatDescription">معرفی مختصر</label>
+    </div>
+    <div class="form-floating ">
+      <input name="slug" class="form-control" id="floatingSlug" placeholder="">
+      <label for="floatingSlug">نامک</label>
+    </div>
+    <div class="form-floating ">
+      <input name="address" class="form-control" id="floatingAddress" placeholder="">
+      <label for="floatingAddress">آدرس</label>
+    </div>
+    <div class="form-floating ">
+      <input name="image" type="file" class="form-control" id="floatingImage" placeholder="">
+      <label for="floatingImage">تصویر</label>
+    </div>
+
+    <button class="w-100 btn mt-3 btn-lg btn-primary" type="submit">ثبت کافه من</button>
+    <p class="mt-5 mb-3 text-muted">&copy;Bootstrap 2017–2021 </p>
+  </form>
+</main>
+
+
+
+  </body>
+</html>
