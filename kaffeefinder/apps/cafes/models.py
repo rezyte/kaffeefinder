@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
+from kaffeefinder.apps.comments.models import Review
+
 User = get_user_model()
 
 class Cafe(models.Model):
     # each manager user is able to have only one cafe instance
-    owner = models.OneToOneField(
+    owner = models.ForeignKey(
         User, on_delete=models.CASCADE,
         limit_choices_to=Q( groups__name = 'cafe manager'),
         verbose_name="مدیر کافی شاپ"
@@ -22,3 +24,17 @@ class Cafe(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def get_address(self):
+        try:
+            return f"{self.address[:30]} ..."
+        except IndexError:
+            return self.address
+
+    def latest_comments(self):
+        try:
+            objects = Review.objects.filter(cafe=self)[:5]
+        except IndexError:
+            objects = Review.objects.filter(cafe=self)
+        return objects

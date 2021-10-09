@@ -3,55 +3,45 @@
 
 {% block extra_style %}
   <link rel="stylesheet" href="{% static 'site/css/list.css' %}">
-{% block extra_style %}
+  <style media="screen">
+    .address {
+      max-height: 40px;
+    }
+    .cafe-card {
+      height: 220px;
+    }
+  </style>
+{% endblock extra_style %}
 {% block content %}
-<div class="wrapper">
-    <div class="container">
-        <div class="row g-1">
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <div class="text-center"> <img src="https://i.imgur.com/w2rCsEw.jpg" width="200"> </div>
-                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
-                        <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
-                        </div>
-                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+      <h2>لیست کافه ها</h2>
+        <div class="col-md-10">
+
+            {% for cafe in object_list %}
+            <div class="row p-2 bg-white border rounded mt-2 cafe-card">
+                <div class="col-md-3 mt-1 d-flex align-items-center"><img class="img-fluid img-responsive rounded product-image" src="{{ cafe.image.url }}"></div>
+                <div class="col-md-6 mt-1">
+                    <h5>{{ cafe.title }}</h5>
+                    <div class="d-flex flex-row">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><span> (110)</span>
+                    </div>
+                    <!-- <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light weight</span><span class="dot"></span><span>Best finish<br></span></div> -->
+                    <div class="mt-1 mb-1 spec-1"><span>دنج</span><span class="dot"></span><span>سیگار آزاد</span><span class="dot"></span><span>بیرون بر<br></span></div>
+                    <p class="text-justify text-truncate para mb-0">{{ cafe.description }}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                      {{ cafe.get_address }}
+                    </div>
+                    <h6 class="text-success">فضای باز</h6>
+                    <div class="d-flex flex-column mt-4">
+                      <a class="btn btn-primary btn-sm" href="/cafes/{{cafe.slug}}/">مشاهده</a>
+                      <a class="btn btn-outline-primary btn-sm mt-2" href="/cafes/{{cafe.slug}}/">نظر</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <div class="text-center"> <img src="https://i.imgur.com/ZRUetRF.jpg" width="200"> </div>
-                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
-                        <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
-                        </div>
-                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <div class="text-center"> <img src="https://i.imgur.com/0M7pldG.jpg" width="200"> </div>
-                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
-                        <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
-                        </div>
-                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <div class="text-center"> <img src="https://i.imgur.com/emb60L5.jpg" width="200"> </div>
-                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
-                        <div class="buttons d-flex flex-row">
-                            <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
-                        </div>
-                        <div class="weight"> <small>20 piece 2.5kg</small> </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

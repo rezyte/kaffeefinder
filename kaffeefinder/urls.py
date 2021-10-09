@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
@@ -21,13 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html")),
     path('admin/', admin.site.urls),
     path("auth/", include("kaffeefinder.apps.accounts.urls", namespace="accounts")),
     path("cafes/", include("kaffeefinder.apps.cafes.urls", namespace="cafes")),
+    path("comments/", include("kaffeefinder.apps.comments.urls", namespace="comments")),
     path("", include("kaffeefinder.apps.pages.urls", namespace="pages")),
-)
+]
 
 
 if settings.DEBUG:

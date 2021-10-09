@@ -1,26 +1,87 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{object.title}} | مشاهده{% endblock title %}
+{% block title %} {{object.title}} | مشاهده {% endblock title %}
 
 {% block extra_style %}
   <!-- <link rel="stylesheet" href="{% static 'site/css/detail.css' %}"> -->
+  <style type="text/css">
+    .comment-img {
+      max-width: 120px;
+      max-height: 150px;
+    }
+  </style>
 {% endblock extra_style %}
 
 
 {% block content %}
-      <div class="">
-      <div class="row  row-cols-1 row-cols-md-2 g-4">
+      <div class="container">
+        <h3>{{object.title}}</h3>
+      <div class="row  row-cols-1 row-cols-md-2 g-4 mt-2">
         <div class="col">
           <div class="card">
             <img src="{{ object.image.url }}" alt="" class="card-img-top" width="380" height="380">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">{{object.title}}</h5>
+              <p class="card-text">{{object.description}}</p>
+              <p class="card-text text-muted">{{object.address}}</p>
+              <a href="#" class="btn btn-primary"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="list-group">   
+              {% for comment in object.latest_comments %}     
+                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                  <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+                  <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                      <h6 class="mb-0">{{comment.user.username}}</h6>
+                      <p class="mb-0 opacity-75">{{comment.content}}</p>
+                    </div>
+                    <small class="opacity-50 text-nowrap">{{comment.timestamp}}</small>
+                    <br>
+                  </div>
+                  <div class="row">
+                    <img src="https://goolsa.com/media/cache/8b/a7/8ba74fb67b6297cd455453a08c170ba9.jpg" class="comment-img">
+                  </div>
+                </a> 
+              {% endfor %}   
             </div>
           </div>
         </div>
       </div>
+      {%  if request.user.is_authenticated %}
+      <div class="row mt-5">
+        <h4> نظر خود را ثبت کنید</h4>
+        <div class="col-sm-6 p-4 d-flex justify-content-center">
+            <form method="POST" action="/comments/add/{{object.slug}}/" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="hidden" name="cafe" value="{{object.id}}">
+              <input type="hidden" name="user" value="{{request.user.id}}">
+          <div class="form-group">
+            <label for="reviewContent" class="col-sm-2 col-form-label">متن نظر</label>
+            <div class="col-sm-10">
+              <textarea row="15" cols="8" name="content" id="reviewContent" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group mt-2">
+            <label for="Image">عکس کافه را ارسال کنید</label>
+            <input type="file"  name="image" class="form-control-file" id="Image">
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-10 d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary mt-2">ثبت نظر</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+      {% endif %}
     </div>
 {% endblock content %}
+
+{% block extra_scripts %}
+  <script type="text/javascript" src="{% static 'site/js/detail.js' %}"></script>
+{% endblock extra_scripts %}

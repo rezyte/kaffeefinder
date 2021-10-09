@@ -36,4 +36,4 @@ class SingleCafeView(generic.DetailView):
 
 class CafeListView(generic.ListView):
     template_name = "cafes/list.html"
-    queryset = Cafe.object.all()
+    queryset = Cafe.objects.all()
