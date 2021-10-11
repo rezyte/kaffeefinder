@@ -1,6 +1,7 @@
 import os
 import json
 import sys
+from decouple import config
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 from kaffeefinder.apps.core.versioning import get_git_changeset_timestamp
@@ -30,7 +31,7 @@ kaffeefinder_MAIN_PATH = BASE_DIR / "kaffeefinder"
 #         raise ImproperlyConfigured(error_msg)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +39,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "0.0.0.0",
+    "87.107.68.50",
 ]
 
 
