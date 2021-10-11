@@ -1,7 +1,6 @@
 import os
 import json
 import sys
-from decouple import config
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 from kaffeefinder.apps.core.versioning import get_git_changeset_timestamp
