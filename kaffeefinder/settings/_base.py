@@ -16,16 +16,6 @@ kaffeefinder_MAIN_PATH = BASE_DIR / "kaffeefinder"
 # EXTERNAL_LIBS_PATH = os.path.join(EXTERNAL_BASE, "libs")
 # EXTERNAL_APPS_PATH = os.path.join(EXTERNAL_BASE, "apps")
 
-with open(kaffeefinder_MAIN_PATH / 'settings' /'secrets.json', 'r') as f:
-    secrets = json.loads(f.read())
-
-def get_secret(setting):
-    """Get secret variable or return explicit exception"""
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = f"set the {setting} environment variable"
-        raise ImproperlyConfigured(error_msg)
 #
 # with open(os.path.join(os.path.dirname(__file__), 'secrets.json'), 'r') as f:
 #     secrets = json.loads(f.read())
@@ -40,7 +30,7 @@ def get_secret(setting):
 #         raise ImproperlyConfigured(error_msg)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -138,8 +128,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-EMAIL_HOST = get_secret("EMAIL_HOST")
-EMAIL_PORT = get_secret("EMAIL_PORT")
-EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
