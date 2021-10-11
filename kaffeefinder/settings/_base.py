@@ -31,7 +31,7 @@ kaffeefinder_MAIN_PATH = BASE_DIR / "kaffeefinder"
 #         raise ImproperlyConfigured(error_msg)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('DJANGO_SECRET_KEY')
+SECRET_KEY = "irmfaosd9uiv[qe4irt'pokdf0qierqerg[oqjefglbkjadf"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
