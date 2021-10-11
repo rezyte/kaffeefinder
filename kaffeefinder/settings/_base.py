@@ -125,6 +125,7 @@ LOCALE_PATHS = [
 
 # auth
 LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/cafes/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'kaffeefinder', 'site_static'),
