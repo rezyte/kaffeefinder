@@ -38,6 +38,9 @@
                     <div class="d-flex flex-column mt-4">
                       <a class="btn btn-primary btn-sm" href="/cafes/{{cafe.slug}}/">مشاهده</a>
                       <a class="btn btn-outline-primary btn-sm mt-2" href="/cafes/{{cafe.slug}}/">نظر</a>
+                      {% if request.user == cafe.owner %} 
+                        <a class="btn btn-outline-primary btn-sm mt-2" href="/cafes/{{cafe.slug}}/edit/">ویرایش</a>
+                      {% endif %}
                     </div>
                 </div>
             </div>

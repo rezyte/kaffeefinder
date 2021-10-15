@@ -69,7 +69,7 @@ class SignUpAsCafeManager(AnonymousMixin, View):
 class LogoutView(View):
 
     def get(self, request):
-        if self.request.is_authenticated:
+        if self.request.user.is_authenticated:
             logout(request)
             messages.warning(request, "شما از حساب کاربری خود خارج شدید")
             return redirect("pages:index")

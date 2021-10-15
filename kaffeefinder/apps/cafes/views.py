@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import generic, View
 from django.http import HttpResponse
 from django.contrib.auth import mixins
@@ -23,7 +23,7 @@ class CafeCreatView(mixins.LoginRequiredMixin, View):
             cafe = form.save()
             messages.success(request, "شما کافه خود را با موفقیت ایجاد کردید")
             return redirect(
-                reverse("cafe:single-cafe", kwargs={"slug": cafe.slug})
+                reverse("cafes:single-cafe", kwargs={"slug": cafe.slug})
             )
         else:
             print(form.errors)
@@ -33,6 +33,26 @@ class SingleCafeView(generic.DetailView):
     template_name = "cafes/detail.html"
     queryset = Cafe.objects.all()
     slug = "slug"
+
+# class EditCafeView(View):
+
+#     def get(self, request, slug):
+#         cafe = get_object_or_404(Cafe, slug=slug)
+#         return render(request, "cafes/create.html", context={ "instance": cafe })
+
+#     def post(self, request, slug):
+#         cafe = 
+
+
+class MyCafesView(generic.ListView):
+    template_name = "cafes/list.html"
+    def get_queryset(self):
+        return Cafe.objects.filter(owner=self.request.user)
+
+class CafeUpdateView(generic.UpdateView):
+    model = Cafe
+    fields = ["title", "description", "slug", "image"]
+    template_name = "cafes/create.html"
 
 class CafeListView(generic.ListView):
     template_name = "cafes/list.html"

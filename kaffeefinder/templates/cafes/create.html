@@ -35,23 +35,43 @@
     <h1 class="h3 mb-3 fw-normal">کافه خود را ثبت کنید</h1>
     {% csrf_token %}
     <div class="form-floating">
+      {% if object %}
+      <input name="title" class="form-control" id="floatingInput" placeholder="" value="{{ object.title }}">
+      {% else %}
       <input name="title" class="form-control" id="floatingInput" placeholder="">
+      {% endif %}
       <label for="floatingInput">نام کافی شاپ</label>
     </div>
     <div class="form-floating">
+      {% if object %}
+      <input name="description" class="form-control" id="floatDescription" placeholder="" value="{{ object.description }}">
+      {% else %}
       <input name="description" class="form-control" id="floatDescription" placeholder="">
+      {% endif %}
       <label for="floatDescription">معرفی مختصر</label>
     </div>
     <div class="form-floating ">
+      {% if object %}
+      <input name="slug" class="form-control" id="floatingSlug" placeholder="" value="{{ object.slug }}" type="hidden">
+      {% else %}
       <input name="slug" class="form-control" id="floatingSlug" placeholder="">
+      {% endif %}
       <label for="floatingSlug">نامک</label>
     </div>
     <div class="form-floating ">
+      {% if object %}
+      <input name="address" class="form-control" id="floatingAddress" placeholder="" value="{{ object.address }}">
+      {% else %}
       <input name="address" class="form-control" id="floatingAddress" placeholder="">
+      {% endif %}
       <label for="floatingAddress">آدرس</label>
     </div>
     <div class="form-floating ">
+      {% if object %}
+      <input name="image" type="file" class="form-control" id="floatingImage" placeholder="" value="{{ object.image.url }}">
+      {% else %}
       <input name="image" type="file" class="form-control" id="floatingImage" placeholder="">
+      {% endif %}
       <label for="floatingImage">تصویر</label>
     </div>
 
