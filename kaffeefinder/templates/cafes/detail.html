@@ -5,6 +5,8 @@
 
 {% block extra_style %}
   <!-- <link rel="stylesheet" href="{% static 'site/css/detail.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'site/css/list.css' %}">
+
   <style type="text/css">
     .comment-img {
       max-width: 120px;
@@ -25,7 +27,15 @@
               <h5 class="card-title">{{object.title}}</h5>
               <p class="card-text">{{object.description}}</p>
               <p class="card-text text-muted">{{object.address}}</p>
-              <a href="#" class="btn btn-primary"></a>
+              <div class="mt-1 mb-1 spec-1">
+                {% for tag in cafe.tags.all %}
+                  {% if forloop.last %}
+                    <span>{{ tag.title }}</span>
+                  {% else %}
+                    <span>{{ tag.title }}</span><span class="dot"></span>
+                  {% endif %}
+                {% endfor %}
+               </div>
             </div>
           </div>
         </div>

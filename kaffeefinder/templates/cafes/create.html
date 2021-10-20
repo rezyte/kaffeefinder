@@ -74,6 +74,15 @@
       {% endif %}
       <label for="floatingImage">تصویر</label>
     </div>
+    <div class="form-group">
+      
+      <label for="propSelect">ویژگی های کافه</label>
+      <select class="form-select" id="propSelect" name="tags" multiple>
+        {% for tag in tags %}
+        <option value="{{ tag.id }}">{{ tag.title }}</option>
+        {% endfor %}
+      </select>
+    </div>
 
     <button class="w-100 btn mt-3 btn-lg btn-primary" type="submit">ثبت کافه من</button>
     <p class="mt-5 mb-3 text-muted">&copy;Bootstrap 2017–2021 </p>

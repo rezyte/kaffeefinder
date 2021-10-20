@@ -4,14 +4,16 @@ from django.http import HttpResponse
 from django.contrib.auth import mixins
 from django.contrib import messages
 
-from .models import Cafe
+from .models import Cafe, CafeTag
 from .forms import CafeForm
 
 class CafeCreatView(mixins.LoginRequiredMixin, View):
 
     def get(self, request):
         form = CafeForm()
-        return render(request, "cafes/create.html", context={"form": form})
+        tags = CafeTag.objects.all()
+        context = { "form": form, "tags": tags }
+        return render(request, "cafes/create.html", context)
 
     def post(self, request):
         data = request.POST.copy()
