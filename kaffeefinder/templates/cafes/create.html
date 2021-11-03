@@ -78,9 +78,15 @@
       
       <label for="propSelect">ویژگی های کافه</label>
       <select class="form-select" id="propSelect" name="tags" multiple>
-        {% for tag in tags %}
-        <option value="{{ tag.id }}">{{ tag.title }}</option>
-        {% endfor %}
+        {% if object %}
+          {% for tag in object.tags %}
+            <option value="{{ tag.id }}">{{ tag.title }}</option>
+          {% endfor %}
+        {% else %}
+          {% for tag in tags %}
+            <option value="{{ tag.id }}">{{ tag.title }}</option>
+          {% endfor %}
+        {% endif %}
       </select>
     </div>
 
