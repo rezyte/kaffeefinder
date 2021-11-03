@@ -53,8 +53,19 @@ class MyCafesView(generic.ListView):
 
 class CafeUpdateView(generic.UpdateView):
     model = Cafe
-    fields = ["title", "description", "slug", "image"]
+    fields = ["title", "description", "slug", "image", "tags"]
     template_name = "cafes/create.html"
+
+    def get_context_data(self, **kwargs):
+        if self.object:
+            qs = CafeTag.objects.all()
+            minus_tags = self.object.tags.all()
+            li = []
+            for obj in qs:
+                if obj not in minus_tags:
+                    li.append(obj)
+            kwargs["res_tags"] = li
+        return super().get_context_data(**kwargs)
 
 class CafeListView(generic.ListView):
     template_name = "cafes/list.html"
