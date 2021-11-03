@@ -20,11 +20,13 @@
   <body class="text-center">
 
 <main class="form-signin">
-  {%  for message in messages %}
-    <div class="alert alert-{{message.tag}}" role="alert">
-      {{ message }}
-    </div>
-  {% endfor %}
+  {% if messages %}
+    {%  for message in messages %}
+      <div class="alert alert-{{message.tag}}" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
   <form method="POST" class="h3 mb-3 fw-normal">وارد شوید</h1>
     {% csrf_token %}
     <div class="form-floating">
