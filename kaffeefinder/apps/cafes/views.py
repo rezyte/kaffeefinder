@@ -29,7 +29,7 @@ class CafeCreatView(mixins.LoginRequiredMixin, View):
             )
         else:
             print(form.errors)
-            return HttpResponse(form.errors, "<br><a href="/cafes/add/">Go Back</a>")
+            return HttpResponse(form.errors, '<br><a href="/cafes/add/">Go Back</a>')
 
 class SingleCafeView(generic.DetailView):
     template_name = "cafes/detail.html"
