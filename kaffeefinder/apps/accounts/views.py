@@ -33,26 +33,26 @@ class SignUpView(AnonymousMixin, View):
 class NewLoginView(LoginView):
      template_name = "accounts/login.html"
 
-class NewLoginView(View):
+# class NewLoginView(View):
 
-    def get(self, request, *args, **kwargs):
-        return render(request, "accounts/login.html")
+#     def get(self, request, *args, **kwargs):
+#         return render(request, "accounts/login.html")
 
-    def post(self, request, *args, **kwargs):
-        username = request.POST.get("username")
-        passowrd = request.POST.get("passowrd")
-        if username and passowrd:
-            user = authenticate(username=username, password=passowrd)
-            if user:
-                login(request, user)
-                messages.success(request, "باموفقیت وارد شدید")
-                return redirect("cafes:list")
-            else:
-                messages.success(request, "کاربری با این مشخصات وجود ندارد!")
-                return redirect("accounts:login")
-        else:
-            messages.warning(request, "نام کاربری یا رمزعبور نمیتواند خالی باشد")
-            return redirect("accounts:login")
+#     def post(self, request, *args, **kwargs):
+#         username = request.POST.get("username")
+#         passowrd = request.POST.get("passowrd")
+#         if username and passowrd:
+#             user = authenticate(username=username, password=passowrd)
+#             if user:
+#                 login(request, user)
+#                 messages.success(request, "باموفقیت وارد شدید")
+#                 return redirect("cafes:list")
+#             else:
+#                 messages.success(request, "کاربری با این مشخصات وجود ندارد!")
+#                 return redirect("accounts:login")
+#         else:
+#             messages.warning(request, "نام کاربری یا رمزعبور نمیتواند خالی باشد")
+#             return redirect("accounts:login")
             
 # a different view for cafe managers to sign up
 # which redirects to a view to create their cafe
